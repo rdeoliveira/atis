@@ -1,0 +1,347 @@
+No model snapshot provided, loading from config
+No config file specified, reading from stdin
+Configured model snapshot output/atis_model.pt
+
+=== Starting testing...
+Cuda is not available, running on CPU...
+
+    # for debug of GPU
+    use_cuda_if_available: True
+    device_id: 0
+    world_size: 1
+    torch.cuda.is_available(): False
+    cuda_utils.CUDA_ENABLED: False
+    cuda_utils.DISTRIBUTED_WORLD_SIZE: 1
+    
+Loading model from output/atis_model.pt...
+Task parameters:
+
+{'data_handler': {'columns_to_read': ['doc_label', 'word_label', 'text'],
+                  'eval_batch_size': 128,
+                  'eval_path': 'data/atis.processed.val.csv',
+                  'max_seq_len': -1,
+                  'shuffle': True,
+                  'sort_within_batch': True,
+                  'test_batch_size': 128,
+                  'test_path': 'data/atis.processed.test.csv',
+                  'train_batch_size': 86,
+                  'train_path': 'data/atis.processed.train.csv'},
+ 'exporter': {'export_logits': False},
+ 'features': {'char_feat': None,
+              'dense_feat': None,
+              'dict_feat': None,
+              'freeze': False,
+              'load_path': None,
+              'pretrained_model_embedding': None,
+              'save_path': None,
+              'seq_word_feat': None,
+              'shared_module_key': None,
+              'word_feat': {'embed_dim': 100,
+                            'embedding_init_range': None,
+                            'embedding_init_strategy': 'zero',
+                            'export_input_names': ['tokens_vals'],
+                            'freeze': False,
+                            'lowercase_tokens': True,
+                            'min_freq': 1,
+                            'mlp_layer_dims': [],
+                            'pretrained_embeddings_path': 'data/glove.6B.100d.txt',
+                            'vocab_file': '',
+                            'vocab_from_all_data': False,
+                            'vocab_from_pretrained_embeddings': False,
+                            'vocab_from_train_data': True,
+                            'vocab_size': 0}},
+ 'featurizer': {'SimpleFeaturizer': {'convert_to_bytes': False,
+                                     'lowercase_tokens': True,
+                                     'sentence_markers': None,
+                                     'split_regex': '\\s+'}},
+ 'labels': [{'DocLabelConfig': {'export_output_names': ['doc_scores'],
+                                'label_weights': {},
+                                'target_prob': False}},
+            {'WordLabelConfig': {'export_output_names': ['word_scores'],
+                                 'use_bio_labels': False}}],
+ 'metric_reporter': {'output_path': '/tmp/test_out.txt'},
+ 'model': {'decoder': {'freeze': False,
+                       'load_path': None,
+                       'save_path': None,
+                       'shared_module_key': None,
+                       'use_doc_probs_in_word': False},
+           'default_doc_loss_weight': 0.2,
+           'default_word_loss_weight': 0.5,
+           'output_layer': {'doc_output': {'freeze': False,
+                                           'load_path': None,
+                                           'loss': {'CrossEntropyLoss': {}},
+                                           'save_path': None,
+                                           'shared_module_key': None},
+                            'freeze': False,
+                            'load_path': None,
+                            'save_path': None,
+                            'shared_module_key': None,
+                            'word_output': {'CRFOutputLayer': {'freeze': False,
+                                                               'load_path': None,
+                                                               'save_path': None,
+                                                               'shared_module_key': None}}},
+           'representation': {'BiLSTMDocSlotAttention': {'doc_mlp_layers': 0,
+                                                         'dropout': 0.4,
+                                                         'freeze': False,
+                                                         'load_path': None,
+                                                         'lstm': {'bidirectional': True,
+                                                                  'dropout': 0.5,
+                                                                  'freeze': False,
+                                                                  'load_path': None,
+                                                                  'lstm_dim': 366,
+                                                                  'num_layers': 2,
+                                                                  'save_path': None,
+                                                                  'shared_module_key': None},
+                                                         'pooling': {'SelfAttention': {'attn_dimension': 128,
+                                                                                       'dropout': 0.4}},
+                                                         'save_path': None,
+                                                         'shared_module_key': None,
+                                                         'slot_attention': None,
+                                                         'word_mlp_layers': 0}}},
+ 'optimizer': {'Adam': {'lr': 0.001, 'weight_decay': 0.0}},
+ 'random_seed': 0,
+ 'scheduler': {'T_max': 1000,
+               'cooldown': 0,
+               'cut_frac': 0.1,
+               'eta_min': 0.0,
+               'gamma': 0.1,
+               'lm_gradual_unfreezing': True,
+               'lm_lr_multiplier': 1.0,
+               'lm_use_per_layer_lr': False,
+               'non_pretrained_param_groups': 2,
+               'patience': 5,
+               'ratio': 32,
+               'step_size': 30,
+               'threshold': 0.0001,
+               'threshold_is_absolute': False,
+               'type': 'none'},
+ 'trainer': {'early_stop_after': 0,
+             'epochs': 30,
+             'max_clip_norm': None,
+             'report_train_metrics': True}}
+creating field TextFeatureField
+creating field DocLabelField
+creating field WordLabelField
+
+Loading data...
+load_path is not a config of embedding, skipping
+save_path is not a config of embedding, skipping
+freeze is not a config of embedding, skipping
+shared_module_key is not a config of embedding, skipping
+seq_word_feat is not a config of embedding, skipping
+dict_feat is not a config of embedding, skipping
+char_feat is not a config of embedding, skipping
+dense_feat is not a config of embedding, skipping
+pretrained_model_embedding is not a config of embedding, skipping
+reading data from data/atis.processed.test.csv
+Rank 0 worker: Running epoch #1 for Stage.TEST
+
+
+Stage.TEST
+loss: 1.401036
+
+
+Frame accuracy = 88.13
+
+
+Bracket Metrics
+
+Intent Metrics
+	Per label scores                        	Precision 	Recall    	F1        	Support   
+
+	flight                                  	98.26     	98.58     	98.42     	632       
+	flight_no                               	88.89     	100.00    	94.12     	8         
+	abbreviation                            	100.00    	100.00    	100.00    	33        
+	ground_service                          	97.30     	100.00    	98.63     	36        
+	airfare                                 	96.00     	100.00    	97.96     	48        
+	airline                                 	100.00    	100.00    	100.00    	38        
+	airport                                 	94.44     	94.44     	94.44     	18        
+	city                                    	75.00     	100.00    	85.71     	6         
+	capacity                                	95.45     	100.00    	97.67     	21        
+	ground_fare                             	100.00    	100.00    	100.00    	7         
+	distance                                	100.00    	90.00     	94.74     	10        
+	quantity                                	42.86     	100.00    	60.00     	3         
+	meal                                    	83.33     	83.33     	83.33     	6         
+	aircraft                                	100.00    	88.89     	94.12     	9         
+	flight_time                             	50.00     	100.00    	66.67     	1         
+	airfare+flight                          	0.00      	0.00      	0.00      	1         
+	flight+airfare                          	80.00     	33.33     	47.06     	12        
+	day_name                                	0.00      	0.00      	0.00      	2         
+	flight_no+airline                       	0.00      	0.00      	0.00      	1         
+	flight+airline                          	0.00      	0.00      	0.00      	1         
+
+	Overall micro scores                    	97.09     	97.09     	97.09     	893       
+	Overall macro scores                    	70.08     	74.43     	70.64     
+
+
+Slot Metrics
+	Per label scores                        	Precision 	Recall    	F1        	Support   
+
+	toloc.city_name                         	97.26     	99.44     	98.34     	715       
+	fromloc.city_name                       	98.87     	99.57     	99.22     	703       
+	fare_basis_code                         	94.44     	100.00    	97.14     	17        
+	booking_class                           	0.00      	0.00      	0.00      	1         
+	restriction_code                        	100.00    	100.00    	100.00    	4         
+	city_name                               	81.40     	62.50     	70.71     	56        
+	airline_code                            	94.29     	97.06     	95.65     	34        
+	toloc.airport_code                      	100.00    	100.00    	100.00    	4         
+	depart_date.day_name                    	98.61     	97.26     	97.93     	146       
+	airline_name                            	100.00    	98.97     	99.48     	97        
+	state_name                              	0.00      	0.00      	0.00      	6         
+	days_code                               	0.00      	0.00      	0.00      	0         
+	mod                                     	0.00      	0.00      	0.00      	2         
+	flight_number                           	100.00    	85.71     	92.31     	7         
+	meal_code                               	100.00    	100.00    	100.00    	1         
+	meal                                    	82.35     	87.50     	84.85     	16        
+	meal_description                        	100.00    	75.00     	85.71     	8         
+	aircraft_code                           	96.67     	96.67     	96.67     	30        
+	airport_name                            	75.00     	60.00     	66.67     	20        
+	airport_code                            	80.00     	44.44     	57.14     	9         
+	fromloc.airport_code                    	55.56     	100.00    	71.43     	5         
+	toloc.state_name                        	0.00      	0.00      	0.00      	3         
+	transport_type                          	90.00     	90.00     	90.00     	10        
+	class_type                              	94.74     	100.00    	97.30     	18        
+	depart_time.period_of_day               	96.77     	96.77     	96.77     	31        
+	depart_date.today_relative              	71.43     	83.33     	76.92     	6         
+	fromloc.airport_name                    	50.00     	81.82     	62.07     	11        
+	day_name                                	100.00    	50.00     	66.67     	2         
+	flight_stop                             	100.00    	100.00    	100.00    	15        
+	round_trip                              	100.00    	94.59     	97.22     	37        
+	flight_mod                              	78.26     	78.26     	78.26     	23        
+	fromloc.state_code                      	100.00    	100.00    	100.00    	1         
+	arrive_date.date_relative               	50.00     	100.00    	66.67     	1         
+	arrive_date.day_name                    	63.64     	77.78     	70.00     	9         
+	toloc.airport_name                      	33.33     	33.33     	33.33     	3         
+	arrive_date.month_name                  	100.00    	83.33     	90.91     	6         
+	stoploc.city_name                       	86.36     	95.00     	90.48     	20        
+	flight_days                             	100.00    	100.00    	100.00    	4         
+	stoploc.airport_name                    	0.00      	0.00      	0.00      	0         
+	stoploc.airport_code                    	0.00      	0.00      	0.00      	1         
+	cost_relative                           	100.00    	100.00    	100.00    	35        
+	depart_time.time_relative               	100.00    	88.00     	93.62     	25        
+	depart_date.month_name                  	95.83     	97.87     	96.84     	47        
+	flight_time                             	50.00     	100.00    	66.67     	1         
+	arrive_time.time_relative               	80.00     	85.71     	82.76     	14        
+	depart_time.end_time                    	75.00     	100.00    	85.71     	3         
+	depart_time.time                        	25.00     	33.33     	28.57     	3         
+	arrive_time.period_of_day               	71.43     	100.00    	83.33     	5         
+	compartment                             	0.00      	0.00      	0.00      	1         
+	connect                                 	100.00    	100.00    	100.00    	4         
+	arrive_time.start_time                  	100.00    	100.00    	100.00    	8         
+	arrive_time.end_time                    	100.00    	100.00    	100.00    	8         
+	depart_time.start_time                  	75.00     	100.00    	85.71     	3         
+	depart_time.period_mod                  	100.00    	100.00    	100.00    	1         
+	arrive_time.time                        	62.50     	100.00    	76.92     	5         
+	flight                                  	0.00      	0.00      	0.00      	1         
+	depart_date.date_relative               	87.50     	100.00    	93.33     	7         
+	depart_date.day_number                  	100.00    	100.00    	100.00    	1         
+	fare_amount                             	100.00    	100.00    	100.00    	1         
+	return_date.day_name                    	0.00      	0.00      	0.00      	1         
+	period_of_day                           	0.00      	0.00      	0.00      	1         
+	return_date.date_relative               	50.00     	33.33     	40.00     	3         
+
+	Overall micro scores                    	95.45     	95.62     	95.53     	2260      
+	Overall macro scores                    	70.02     	72.69     	70.38     
+
+
+
+Tree Metrics
+
+Intent Metrics
+	Per label scores                        	Precision 	Recall    	F1        	Support   
+
+	flight                                  	91.64     	91.93     	91.79     	632       
+	flight_no                               	88.89     	100.00    	94.12     	8         
+	abbreviation                            	87.88     	87.88     	87.88     	33        
+	ground_service                          	64.86     	66.67     	65.75     	36        
+	airfare                                 	88.00     	91.67     	89.80     	48        
+	airline                                 	94.74     	94.74     	94.74     	38        
+	airport                                 	55.56     	55.56     	55.56     	18        
+	city                                    	75.00     	100.00    	85.71     	6         
+	capacity                                	95.45     	100.00    	97.67     	21        
+	ground_fare                             	85.71     	85.71     	85.71     	7         
+	distance                                	33.33     	30.00     	31.58     	10        
+	quantity                                	42.86     	100.00    	60.00     	3         
+	meal                                    	83.33     	83.33     	83.33     	6         
+	aircraft                                	100.00    	88.89     	94.12     	9         
+	flight_time                             	50.00     	100.00    	66.67     	1         
+	airfare+flight                          	0.00      	0.00      	0.00      	1         
+	flight+airfare                          	40.00     	16.67     	23.53     	12        
+	day_name                                	0.00      	0.00      	0.00      	2         
+	flight_no+airline                       	0.00      	0.00      	0.00      	1         
+	flight+airline                          	0.00      	0.00      	0.00      	1         
+
+	Overall micro scores                    	88.13     	88.13     	88.13     	893       
+	Overall macro scores                    	58.86     	64.65     	60.40     
+
+
+Slot Metrics
+	Per label scores                        	Precision 	Recall    	F1        	Support   
+
+	toloc.city_name                         	97.26     	99.44     	98.34     	715       
+	fromloc.city_name                       	98.87     	99.57     	99.22     	703       
+	fare_basis_code                         	94.44     	100.00    	97.14     	17        
+	booking_class                           	0.00      	0.00      	0.00      	1         
+	restriction_code                        	100.00    	100.00    	100.00    	4         
+	city_name                               	81.40     	62.50     	70.71     	56        
+	airline_code                            	94.29     	97.06     	95.65     	34        
+	toloc.airport_code                      	100.00    	100.00    	100.00    	4         
+	depart_date.day_name                    	98.61     	97.26     	97.93     	146       
+	airline_name                            	100.00    	98.97     	99.48     	97        
+	state_name                              	0.00      	0.00      	0.00      	6         
+	days_code                               	0.00      	0.00      	0.00      	0         
+	mod                                     	0.00      	0.00      	0.00      	2         
+	flight_number                           	100.00    	85.71     	92.31     	7         
+	meal_code                               	100.00    	100.00    	100.00    	1         
+	meal                                    	82.35     	87.50     	84.85     	16        
+	meal_description                        	100.00    	75.00     	85.71     	8         
+	aircraft_code                           	96.67     	96.67     	96.67     	30        
+	airport_name                            	75.00     	60.00     	66.67     	20        
+	airport_code                            	80.00     	44.44     	57.14     	9         
+	fromloc.airport_code                    	55.56     	100.00    	71.43     	5         
+	toloc.state_name                        	0.00      	0.00      	0.00      	3         
+	transport_type                          	90.00     	90.00     	90.00     	10        
+	class_type                              	94.74     	100.00    	97.30     	18        
+	depart_time.period_of_day               	96.77     	96.77     	96.77     	31        
+	depart_date.today_relative              	71.43     	83.33     	76.92     	6         
+	fromloc.airport_name                    	50.00     	81.82     	62.07     	11        
+	day_name                                	100.00    	50.00     	66.67     	2         
+	flight_stop                             	100.00    	100.00    	100.00    	15        
+	round_trip                              	100.00    	94.59     	97.22     	37        
+	flight_mod                              	78.26     	78.26     	78.26     	23        
+	fromloc.state_code                      	100.00    	100.00    	100.00    	1         
+	arrive_date.date_relative               	50.00     	100.00    	66.67     	1         
+	arrive_date.day_name                    	63.64     	77.78     	70.00     	9         
+	toloc.airport_name                      	33.33     	33.33     	33.33     	3         
+	arrive_date.month_name                  	100.00    	83.33     	90.91     	6         
+	stoploc.city_name                       	86.36     	95.00     	90.48     	20        
+	flight_days                             	100.00    	100.00    	100.00    	4         
+	stoploc.airport_name                    	0.00      	0.00      	0.00      	0         
+	stoploc.airport_code                    	0.00      	0.00      	0.00      	1         
+	cost_relative                           	100.00    	100.00    	100.00    	35        
+	depart_time.time_relative               	100.00    	88.00     	93.62     	25        
+	depart_date.month_name                  	95.83     	97.87     	96.84     	47        
+	flight_time                             	50.00     	100.00    	66.67     	1         
+	arrive_time.time_relative               	80.00     	85.71     	82.76     	14        
+	depart_time.end_time                    	75.00     	100.00    	85.71     	3         
+	depart_time.time                        	25.00     	33.33     	28.57     	3         
+	arrive_time.period_of_day               	71.43     	100.00    	83.33     	5         
+	compartment                             	0.00      	0.00      	0.00      	1         
+	connect                                 	100.00    	100.00    	100.00    	4         
+	arrive_time.start_time                  	100.00    	100.00    	100.00    	8         
+	arrive_time.end_time                    	100.00    	100.00    	100.00    	8         
+	depart_time.start_time                  	75.00     	100.00    	85.71     	3         
+	depart_time.period_mod                  	100.00    	100.00    	100.00    	1         
+	arrive_time.time                        	62.50     	100.00    	76.92     	5         
+	flight                                  	0.00      	0.00      	0.00      	1         
+	depart_date.date_relative               	87.50     	100.00    	93.33     	7         
+	depart_date.day_number                  	100.00    	100.00    	100.00    	1         
+	fare_amount                             	100.00    	100.00    	100.00    	1         
+	return_date.day_name                    	0.00      	0.00      	0.00      	1         
+	period_of_day                           	0.00      	0.00      	0.00      	1         
+	return_date.date_relative               	50.00     	33.33     	40.00     	3         
+
+	Overall micro scores                    	95.45     	95.62     	95.53     	2260      
+	Overall macro scores                    	70.02     	72.69     	70.38     
+
+saving result to file /tmp/test_out.txt

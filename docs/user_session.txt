@@ -1,0 +1,42 @@
+$ query 'book flight to new york'
+{"intent":"flight","slots":{"toloc.city_name":"new york"}}
+$ query 'travel to america'
+{"intent":"flight","slots":{"airline_name":"america"}}
+$ query 'virgin flights'
+{"intent":"flight","slots":{"flight_mod":"virgin"}}
+$ query 'lunch on plane'
+{"intent":"aircraft","slots":{"meal_description":"lunch"}}
+$ query 'are there vegan options'
+{"intent":"abbreviation","slots":{}}
+$ query 'are there vegetarian options'
+{"intent":"abbreviation","slots":{}}
+$ query 'what time is the flight'
+{"intent":"flight_time","slots":{"flight_time":"time"}}
+$ query 'how long is the flight'
+{"intent":"flight","slots":{}}
+$ query 'how long is the flight from new york to las vegas'
+{"intent":"flight","slots":{"fromloc.city_name":"new york","toloc.city_name":"las vegas"}}
+$ query 'what is the entertainment on the flight'
+{"intent":"restriction","slots":{"flight_time":"entertainment"}}
+$ query 'are there movies available on the plane'
+{"intent":"aircraft","slots":{}}
+$ query 'do I have to pay for extra baggage?'
+{"intent":"flight","slots":{}}
+$ query 'do I have to pay for extra baggage'
+{"intent":"flight","slots":{}}
+$ query 'do I have to pay for luggage'
+{"intent":"flight","slots":{}}
+$ query 'is the plane safe'
+{"intent":"aircraft","slots":{}}
+$ query 'is there a starbucks at the airport'
+{"intent":"city","slots":{}}
+$ query 'how much is parking at the airport'
+{"intent":"capacity","slots":{}}
+$ query 'what is the baggage weight allowance for the journey'
+{"intent":"abbreviation","slots":{}}
+$ query 'is there a connecting flight'
+{"intent":"flight","slots":{"connect":"connecting"}}
+$ query 'is there good shopping for duty free'
+{"intent":"abbreviation","slots":{"aircraft_code":"shopping"}}
+$ query 'is there free wifi on the plane'
+{"intent":"aircraft","slots":{"aircraft_code":"wifi"}}
