@@ -94,7 +94,7 @@ OK
 ## Model
 
 ### Preparation
-Prepare the supplied raw so that PyText can use it:
+Prepare the supplied raw data so that PyText can use it:
 ```
 $ python3 data/data_processor.py --download-folder data/raw --output-directory data
 ```
