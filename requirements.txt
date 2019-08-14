@@ -30,5 +30,5 @@ torchtext==0.3.1
 tqdm==4.30.0
 typing==3.6.6
 typing-extensions==3.7.2
-urllib3==1.24.1
+urllib3>=1.24.2
 Werkzeug==0.14.1
