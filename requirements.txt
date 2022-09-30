@@ -8,7 +8,7 @@ future==0.17.1
 hypothesis==3.88.3
 idna==2.8
 itsdangerous==1.1.0
-joblib==0.13.1
+joblib==1.2.0
 MarkupSafe==1.1.0
 more-itertools==6.0.0
 numpy==1.22.0
